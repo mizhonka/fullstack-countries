@@ -21,3 +21,9 @@ jobs:
         with:
           push: true
           tags: mizhonka/fullstack-open-countries:latest
+      - name: Cloud Deploy
+        if: github.ref == 'refs/heads/main'
+        env:
+          deploy_url: ${{ secrets.DEPLOY_HOOK }}
+        run: |
+          curl "$deploy_url"
